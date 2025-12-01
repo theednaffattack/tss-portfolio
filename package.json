@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev --host --port 3000",
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest run",
@@ -17,6 +17,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-devtools": "^0.7.0",
     "@tanstack/react-router": "^1.132.0",
@@ -39,6 +40,9 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
+    "@content-collections/core": "^0.12.0",
+    "@content-collections/mdx": "^0.2.2",
+    "@content-collections/vite": "^0.2.7",
     "@tanstack/devtools-vite": "^0.3.11",
     "@tanstack/eslint-config": "^0.3.0",
     "@testing-library/dom": "^10.4.0",
@@ -54,7 +58,9 @@
     "tsx": "^4.0.0",
     "typescript": "^5.7.2",
     "vite": "^7.1.7",
+    "vite-plugin-devtools-json": "^1.0.0",
     "vitest": "^3.0.5",
-    "web-vitals": "^5.1.0"
+    "web-vitals": "^5.1.0",
+    "zod": "^4.1.13"
   }
 }
