@@ -41,7 +41,7 @@ function RouteComponent() {
     <section className="">
       <article className="container relative max-w-3xl">
         <Link
-          to="/blog"
+          to="/recipes"
           className={cn(
             buttonVariants({ variant: 'ghost' }),
             'absolute left-[-200px] top-30 hidden xl:inline-flex',
@@ -69,11 +69,17 @@ function RouteComponent() {
             {recipe.title}
           </h1>
         </div>
+        <div>
+          <img src={recipe.heroImage} width="350px" height="200px" alt="" />
+        </div>
         <Mdx code={recipe.mdx} />
         <hr className="mt-12" />
 
         <div className="flex justify-center py-6 lg:py-10">
-          <Link to="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
+          <Link
+            to="/recipes"
+            className={cn(buttonVariants({ variant: 'ghost' }))}
+          >
             <ChevronLeft className="mr-2 h-4 w-4" />
             See all recipes
           </Link>

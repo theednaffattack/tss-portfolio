@@ -31,9 +31,10 @@ const recipes = defineCollection({
   include: '*.mdx',
   schema: z.object({
     content: z.string(),
-    title: z.string(),
     description: z.string(),
+    heroImage: z.string(),
     pubDate: z.coerce.date(),
+    title: z.string(),
     // author: z.string(),
   }),
   transform: async (document, context) => {
