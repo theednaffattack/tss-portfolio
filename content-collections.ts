@@ -10,6 +10,7 @@ const posts = defineCollection({
   directory: 'content/posts',
   include: '*.mdx',
   schema: z.object({
+    content: z.string(),
     title: z.string(),
     summary: z.string(),
     publishedAt: z.coerce.date(),
@@ -29,10 +30,11 @@ const recipes = defineCollection({
   directory: 'content/recipes',
   include: '*.mdx',
   schema: z.object({
+    content: z.string(),
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
-    author: z.string(),
+    // author: z.string(),
   }),
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document)
