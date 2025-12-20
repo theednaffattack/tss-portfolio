@@ -1,6 +1,7 @@
 import { allRecipes } from 'content-collections'
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { NotFoundPage } from '@/components/not-found-page'
+import { RecipeTable } from '@/components/recipe-table'
 
 export const Route = createFileRoute('/recipes/')({
   component: RouteComponent,
@@ -10,6 +11,7 @@ export const Route = createFileRoute('/recipes/')({
 function RouteComponent() {
   return (
     <div>
+      <RecipeTable recipes={allRecipes} />
       <ul>
         {allRecipes.map((recipe) => (
           <li key={recipe._meta.fileName}>
