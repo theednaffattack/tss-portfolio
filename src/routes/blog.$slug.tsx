@@ -1,11 +1,11 @@
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import { ChevronLeft } from 'lucide-react'
 
+import { allPosts } from 'content-collections'
 import { Mdx } from '@/components/mdx-components'
 import { buttonVariants } from '@/components/ui/button'
 import { seo } from '@/lib/seo'
 import { cn, formatDate } from '@/lib/utils'
-import { allPosts } from 'content-collections'
 
 export const Route = createFileRoute('/blog/$slug')({
   beforeLoad: () => ({
@@ -26,8 +26,8 @@ export const Route = createFileRoute('/blog/$slug')({
     meta: loaderData
       ? [
           ...seo({
-            title: `${loaderData?.post.title} | Eddie Naff Blog`,
-            description: loaderData?.post.summary,
+            title: `${loaderData.post.title} | Eddie Naff Blog`,
+            description: loaderData.post.summary,
           }),
         ]
       : [],

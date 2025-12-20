@@ -1,11 +1,11 @@
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import { ChevronLeft } from 'lucide-react'
+import { allRecipes } from 'content-collections'
 
 import { Mdx } from '@/components/mdx-components'
 import { buttonVariants } from '@/components/ui/button'
 import { seo } from '@/lib/seo'
 import { cn, formatDate } from '@/lib/utils'
-import { allRecipes } from 'content-collections'
 
 export const Route = createFileRoute('/recipes/$slug')({
   beforeLoad: () => ({
