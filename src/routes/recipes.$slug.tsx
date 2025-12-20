@@ -1,4 +1,4 @@
-import { createFileRoute, Link, redirect } from '@tanstack/react-router'
+import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { ChevronLeft } from 'lucide-react'
 import { allRecipes } from 'content-collections'
 
@@ -26,8 +26,8 @@ export const Route = createFileRoute('/recipes/$slug')({
     meta: loaderData
       ? [
           ...seo({
-            title: `${loaderData?.recipe.title} | Eddie Naff Recipes`,
-            description: loaderData?.recipe.description,
+            title: `${loaderData.recipe.title} | Eddie Naff Recipes`,
+            description: loaderData.recipe.description,
           }),
         ]
       : [],

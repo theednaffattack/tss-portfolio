@@ -1,8 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
 import { allRecipes } from 'content-collections'
+import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { NotFoundPage } from '@/components/not-found-page'
 
 export const Route = createFileRoute('/recipes/')({
   component: RouteComponent,
+  notFoundComponent: NotFoundPage,
 })
 
 function RouteComponent() {
@@ -18,6 +20,7 @@ function RouteComponent() {
           </li>
         ))}
       </ul>
+      <Outlet />
     </div>
   )
 }

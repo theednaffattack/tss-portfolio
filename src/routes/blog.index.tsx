@@ -1,8 +1,10 @@
+import { NotFoundPage } from '@/components/not-found-page'
 import { createFileRoute } from '@tanstack/react-router'
 import { allPosts } from 'content-collections'
 
 export const Route = createFileRoute('/blog/')({
   component: RouteComponent,
+  notFoundComponent: NotFoundPage,
 })
 
 function RouteComponent() {
