@@ -1,118 +1,184 @@
 import { createFileRoute } from '@tanstack/react-router'
-import {
-  Zap,
-  Server,
-  Route as RouteIcon,
-  Shield,
-  Waves,
-  Sparkles,
-} from 'lucide-react'
+import { MdxCard } from '@/components/mdx-card'
+import { cn } from '@/lib/utils'
+import { Callout } from '@/components/mdx-callout'
 
 export const Route = createFileRoute('/')({ component: App })
 
-function App() {
-  const features = [
-    {
-      icon: <Zap className="w-12 h-12 text-cyan-400" />,
-      title: 'Powerful Server Functions',
-      description:
-        'Write server-side code that seamlessly integrates with your client components. Type-safe, secure, and simple.',
-    },
-    {
-      icon: <Server className="w-12 h-12 text-cyan-400" />,
-      title: 'Flexible Server Side Rendering',
-      description:
-        'Full-document SSR, streaming, and progressive enhancement out of the box. Control exactly what renders where.',
-    },
-    {
-      icon: <RouteIcon className="w-12 h-12 text-cyan-400" />,
-      title: 'API Routes',
-      description:
-        'Build type-safe API endpoints alongside your application. No separate backend needed.',
-    },
-    {
-      icon: <Shield className="w-12 h-12 text-cyan-400" />,
-      title: 'Strongly Typed Everything',
-      description:
-        'End-to-end type safety from server to client. Catch errors before they reach production.',
-    },
-    {
-      icon: <Waves className="w-12 h-12 text-cyan-400" />,
-      title: 'Full Streaming Support',
-      description:
-        'Stream data from server to client progressively. Perfect for AI applications and real-time updates.',
-    },
-    {
-      icon: <Sparkles className="w-12 h-12 text-cyan-400" />,
-      title: 'Next Generation Ready',
-      description:
-        'Built from the ground up for modern web applications. Deploy anywhere JavaScript runs.',
-    },
-  ]
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-      <section className="relative py-20 px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10"></div>
-        <div className="relative max-w-5xl mx-auto">
-          <div className="flex items-center justify-center gap-6 mb-6">
-            <img
-              src="/tanstack-circle-logo.png"
-              alt="TanStack Logo"
-              className="w-24 h-24 md:w-32 md:h-32"
-            />
-            <h1 className="text-6xl md:text-7xl font-black text-white [letter-spacing:-0.08em]">
-              <span className="text-gray-300">TANSTACK</span>{' '}
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                START
-              </span>
-            </h1>
-          </div>
-          <p className="text-2xl md:text-3xl text-gray-300 mb-4 font-light">
-            The framework for next generation AI applications
-          </p>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-8">
-            Full-stack framework powered by TanStack Router for React and Solid.
-            Build modern applications with server functions, streaming, and type
-            safety.
-          </p>
-          <div className="flex flex-col items-center gap-4">
-            <a
-              href="https://tanstack.com/start"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50"
-            >
-              Documentation
-            </a>
-            <p className="text-gray-400 text-sm mt-2">
-              Begin your TanStack Start journey by editing{' '}
-              <code className="px-2 py-1 bg-slate-700 rounded text-cyan-400">
-                /src/routes/index.tsx
-              </code>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10"
-            >
-              <div className="mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-white mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-gray-400 leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+const components = {
+  h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h1
+      className={cn(
+        'mt-2 scroll-m-20 text-4xl font-bold tracking-tight',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h2
+      className={cn(
+        'mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h3
+      className={cn(
+        'mt-8 scroll-m-20 text-2xl font-semibold tracking-tight',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h4
+      className={cn(
+        'mt-8 scroll-m-20 text-xl font-semibold tracking-tight',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h5
+      className={cn(
+        'mt-8 scroll-m-20 text-lg font-semibold tracking-tight',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h6
+      className={cn(
+        'mt-8 scroll-m-20 text-base font-semibold tracking-tight',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
+    <a
+      className={cn('font-medium underline underline-offset-4', className)}
+      {...props}
+    />
+  ),
+  p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
+    <p
+      className={cn('leading-7 [&:not(:first-child)]:mt-6', className)}
+      {...props}
+    />
+  ),
+  ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
+    <ul className={cn('my-6 ml-6 list-disc', className)} {...props} />
+  ),
+  ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
+    <ol className={cn('my-6 ml-6 list-decimal', className)} {...props} />
+  ),
+  li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
+    <li className={cn('mt-2', className)} {...props} />
+  ),
+  blockquote: ({
+    className,
+    ...props
+  }: React.HTMLAttributes<HTMLQuoteElement>) => (
+    <blockquote
+      className={cn(
+        'mt-6 border-l-2 pl-6 italic [&>*]:text-muted-foreground',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  img: ({
+    className,
+    alt,
+    ...props
+  }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    <img className={cn('rounded-md border', className)} alt={alt} {...props} />
+  ),
+  hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
+  table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
+    <div className="my-6 w-full overflow-y-auto">
+      <table className={cn('w-full', className)} {...props} />
     </div>
+  ),
+  tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
+    <tr
+      className={cn('m-0 border-t p-0 even:bg-muted', className)}
+      {...props}
+    />
+  ),
+  th: ({
+    className,
+    ...props
+  }: React.HTMLAttributes<HTMLTableHeaderCellElement>) => (
+    <th
+      className={cn(
+        'border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  td: ({
+    className,
+    ...props
+  }: React.HTMLAttributes<HTMLTableDataCellElement>) => (
+    <td
+      className={cn(
+        'border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
+    <pre
+      className={cn(
+        ' overflow-x-auto rounded-lg border bg-black py-4',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <code
+      className={cn(
+        'relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  Callout,
+  Card: MdxCard,
+}
+
+function App() {
+  const projects = [
+    { name: 'One', desc: '' },
+    { name: 'Two', desc: '' },
+    { name: 'Three', desc: '' },
+  ]
+  return (
+    <>
+      <section id="projects">
+        <components.h1>Projects</components.h1>
+        <div>
+          <ul>
+            {projects.map(({ name }) => (
+              <MdxCard>{name}</MdxCard>
+            ))}
+          </ul>
+        </div>
+      </section>
+      <section id="contact">
+        <components.h1>Contact Me</components.h1>
+      </section>
+    </>
   )
 }
