@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { ChevronLeft } from 'lucide-react'
 import { allRecipes } from 'content-collections'
@@ -20,7 +21,7 @@ export const Route = createFileRoute('/recipes/$slug')({
       })
     }
 
-    return { recipe }
+    return { crumb: `${recipe.title}`, recipe }
   },
   head: ({ loaderData }) => ({
     meta: loaderData
@@ -57,6 +58,12 @@ function RouteComponent() {
         {/*   </div> */}
         {/* </div> */}
         <div>
+          <img src={recipe.heroImage} width="350px" height="200px" alt="" />
+        </div>
+        <h1 className="my-4 inline-block font-heading text-4xl leading-tight lg:text-5xl">
+          {recipe.title}
+        </h1>{' '}
+        <div>
           {recipe.pubDate && (
             <time
               dateTime={recipe.pubDate.toString()}
@@ -65,16 +72,9 @@ function RouteComponent() {
               Published on {formatDate(recipe.pubDate.toString())}
             </time>
           )}
-          <h1 className="my-4 inline-block font-heading text-4xl leading-tight lg:text-5xl">
-            {recipe.title}
-          </h1>
-        </div>
-        <div>
-          <img src={recipe.heroImage} width="350px" height="200px" alt="" />
         </div>
         <Mdx code={recipe.mdx} />
         <hr className="mt-12" />
-
         <div className="flex justify-center py-6 lg:py-10">
           <Link
             to="/recipes"

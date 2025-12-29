@@ -7,6 +7,7 @@ import {
 import { useReducer, useState } from 'react'
 import type { Recipe } from 'content-collections'
 import { useNavigate } from '@tanstack/react-router'
+import { cn } from '@/lib/utils'
 
 // type Recipe = typeof allRecipes
 // type Recipe = {
@@ -75,21 +76,23 @@ export function RecipeTable({ recipes }: { recipes: Array<Recipe> }) {
   })
 
   const handleRowClick = (linkPath: string) => {
-    // Perform logic here
-    console.log('Button clicked, navigating now...')
-
-    // Imperative navigation
     navigate({ to: `${linkPath}` })
   }
 
   return (
     <div className="p-2">
-      <table>
+      <table className="border-separate border-spacing-0 text-xs">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th
+                  key={header.id}
+                  className={cn(
+                    'whitespace-nowrap bg-stone-600 p-2 text-left font-normal text-gray-100',
+                    'border-t border-solid border-t-stone-600 border-b border-b-stone-600 border-r border-r-stone-300 first:border-l first:border-l-stone-300',
+                  )}
+                >
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -109,7 +112,13 @@ export function RecipeTable({ recipes }: { recipes: Array<Recipe> }) {
               style={{ cursor: 'pointer' }} // Add a pointer cursor for usability
             >
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td
+                  key={cell.id}
+                  className={cn(
+                    'whitespace-nowrap font-normal text-gray-700 p-2',
+                    'border-b border-solid border-b-stone-300 border-r border-r-stone-300 first:border-l first:border-l-stone-300',
+                  )}
+                >
                   {cell.column.id == 'heroImage' ? (
                     <img src={cell.row.original.heroImage} width="100px" />
                   ) : (

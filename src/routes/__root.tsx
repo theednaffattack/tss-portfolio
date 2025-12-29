@@ -5,6 +5,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import Header from '../components/Header_old'
 
 import appCss from '../styles.css?url'
+import { BreadcrumbNav } from '@/components/breadcrumb-nav'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -38,6 +39,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Header />
+        <BreadcrumbNav />
         {children}
         <TanStackDevtools
           config={{

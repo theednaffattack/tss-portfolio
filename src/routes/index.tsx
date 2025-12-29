@@ -3,7 +3,9 @@ import { MdxCard } from '@/components/mdx-card'
 import { cn } from '@/lib/utils'
 import { Callout } from '@/components/mdx-callout'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({
+  component: App,
+})
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -170,8 +172,8 @@ function App() {
         <components.h1>Projects</components.h1>
         <div>
           <ul>
-            {projects.map(({ name }) => (
-              <MdxCard>{name}</MdxCard>
+            {projects.map(({ desc, name }) => (
+              <MdxCard key={name + '-' + desc}>{name}</MdxCard>
             ))}
           </ul>
         </div>

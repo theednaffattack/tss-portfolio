@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RecipesRouteRouteImport } from './routes/recipes.route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RecipesIndexRouteImport } from './routes/recipes.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
@@ -23,15 +24,20 @@ import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr
 import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr.full-ssr'
 import { Route as DemoStartSsrDataOnlyRouteImport } from './routes/demo/start.ssr.data-only'
 
+const RecipesRouteRoute = RecipesRouteRouteImport.update({
+  id: '/recipes',
+  path: '/recipes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecipesIndexRoute = RecipesIndexRouteImport.update({
-  id: '/recipes/',
-  path: '/recipes/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => RecipesRouteRoute,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
@@ -39,9 +45,9 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecipesSlugRoute = RecipesSlugRouteImport.update({
-  id: '/recipes/$slug',
-  path: '/recipes/$slug',
-  getParentRoute: () => rootRouteImport,
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => RecipesRouteRoute,
 } as any)
 const DemoDrizzleRoute = DemoDrizzleRouteImport.update({
   id: '/demo/drizzle',
@@ -91,11 +97,12 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/recipes': typeof RecipesRouteRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/demo/drizzle': typeof DemoDrizzleRoute
   '/recipes/$slug': typeof RecipesSlugRoute
   '/blog': typeof BlogIndexRoute
-  '/recipes': typeof RecipesIndexRoute
+  '/recipes/': typeof RecipesIndexRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/recipes': typeof RecipesRouteRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/demo/drizzle': typeof DemoDrizzleRoute
   '/recipes/$slug': typeof RecipesSlugRoute
@@ -139,11 +147,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/recipes'
     | '/blog/$slug'
     | '/demo/drizzle'
     | '/recipes/$slug'
     | '/blog'
-    | '/recipes'
+    | '/recipes/'
     | '/demo/api/names'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/recipes'
     | '/blog/$slug'
     | '/demo/drizzle'
     | '/recipes/$slug'
@@ -185,11 +195,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RecipesRouteRoute: typeof RecipesRouteRouteWithChildren
   BlogSlugRoute: typeof BlogSlugRoute
   DemoDrizzleRoute: typeof DemoDrizzleRoute
-  RecipesSlugRoute: typeof RecipesSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
-  RecipesIndexRoute: typeof RecipesIndexRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
   DemoStartServerFuncsRoute: typeof DemoStartServerFuncsRoute
@@ -201,6 +210,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/recipes': {
+      id: '/recipes'
+      path: '/recipes'
+      fullPath: '/recipes'
+      preLoaderRoute: typeof RecipesRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -210,10 +226,10 @@ declare module '@tanstack/react-router' {
     }
     '/recipes/': {
       id: '/recipes/'
-      path: '/recipes'
-      fullPath: '/recipes'
+      path: '/'
+      fullPath: '/recipes/'
       preLoaderRoute: typeof RecipesIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof RecipesRouteRoute
     }
     '/blog/': {
       id: '/blog/'
@@ -224,10 +240,10 @@ declare module '@tanstack/react-router' {
     }
     '/recipes/$slug': {
       id: '/recipes/$slug'
-      path: '/recipes/$slug'
+      path: '/$slug'
       fullPath: '/recipes/$slug'
       preLoaderRoute: typeof RecipesSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof RecipesRouteRoute
     }
     '/demo/drizzle': {
       id: '/demo/drizzle'
@@ -295,13 +311,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface RecipesRouteRouteChildren {
+  RecipesSlugRoute: typeof RecipesSlugRoute
+  RecipesIndexRoute: typeof RecipesIndexRoute
+}
+
+const RecipesRouteRouteChildren: RecipesRouteRouteChildren = {
+  RecipesSlugRoute: RecipesSlugRoute,
+  RecipesIndexRoute: RecipesIndexRoute,
+}
+
+const RecipesRouteRouteWithChildren = RecipesRouteRoute._addFileChildren(
+  RecipesRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RecipesRouteRoute: RecipesRouteRouteWithChildren,
   BlogSlugRoute: BlogSlugRoute,
   DemoDrizzleRoute: DemoDrizzleRoute,
-  RecipesSlugRoute: RecipesSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
-  RecipesIndexRoute: RecipesIndexRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoStartApiRequestRoute: DemoStartApiRequestRoute,
   DemoStartServerFuncsRoute: DemoStartServerFuncsRoute,
